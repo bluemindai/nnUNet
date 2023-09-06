@@ -5,7 +5,7 @@ read -p "Enter dataset id: " id
 read -p "Enter train config (ex. 3d_fullres, 3d_lowers, 2d): " conf
 read -p "Enter train fold ([0-4] or all usually): " fold
 read -p "Enter number of processes (1-20): " np
-read -p "Enter trainer you would like to choose (nnUNetTrainer, nnUNetTrainerNoMirroring, nnUNetTrainerNoDA, nnUNetTrainer4000epochs, nnUNetTrainer2000epochs, nnUNetTrainer500epochs, nnUNetTrainer250epochs, nnUNetTrainer150epochs): " trainer
+read -p "Enter trainer you would like to choose (nnUNetTrainer, nnUNetTrainerNoMirroring, nnUNetTrainer_Xepochs-where X could be in [100, 250, 2000, 4000, 8000], nnUNetTrainerDiceCELoss_noSmooth): " trainer
 
 echo "Preparing dataset..."
 nnUNetv2_plan_and_preprocess -d "$id" -c "$conf" --verify_dataset_integrity -np "$np"
