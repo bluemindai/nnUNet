@@ -6,7 +6,7 @@ from nnunetv2.training.loss.deep_supervision import DeepSupervisionWrapper
 from nnunetv2.training.loss.dice import MemoryEfficientSoftDiceLoss
 from nnunetv2.training.nnUNetTrainer.nnUNetTrainer import nnUNetTrainer
 from nnunetv2.training.nnUNetTrainer.variants.training_length.nnUNetTrainer_Xepochs import nnUNetTrainer_250epochs
-from nnunetv2.training.nnUNetTrainer.variants.training_length.nnUNetTrainer_Xepochs import nnUNetTrainer500epochs
+from nnunetv2.training.nnUNetTrainer.variants.training_length.nnUNetTrainer_Xepochs import nnUNetTrainer_500epochs
 from nnunetv2.utilities.helpers import softmax_helper_dim1
 
 
@@ -86,7 +86,7 @@ class nnUNetTrainerDiceCELoss_noSmooth_250epochs(nnUNetTrainer_250epochs):
         loss = DeepSupervisionWrapper(loss, weights)
         return loss
     
-class nnUNetTrainerDiceCELoss_noSmooth_500epochs(nnUNetTrainer500epochs):
+class nnUNetTrainerDiceCELoss_noSmooth_500epochs(nnUNetTrainer_500epochs):
     def _build_loss(self):
         # set smooth to 0
         if self.label_manager.has_regions:

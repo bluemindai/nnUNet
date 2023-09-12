@@ -215,6 +215,24 @@ def load_and_reorient(data, reorent=(0, 1, 2)):
 
     return non_reorent_img, reoriented_image, original_affine, reoriented_affine, reorent_data
 
+def check_if_shape_and_affine_identical(img_1, img_2):
+    
+    if not np.array_equal(img_1.affine, img_2.affine):
+        print("Affine in:")
+        print(img_1.affine)
+        print("Affine out:")
+        print(img_2.affine)
+        print("Diff:")
+        print(np.abs(img_1.affine-img_2.affine))
+        print("WARNING: Output affine not equal to input affine. This should not happen.")
+
+    if img_1.shape != img_2.shape:
+        print("Shape in:")
+        print(img_1.shape)
+        print("Shape out:")
+        print(img_2.shape)
+        print("WARNING: Output shape not equal to input shape. This should not happen.")
+
 def predict_image(input_file, output, model, nnunet_verbose=True, use_gpu=True):
     '''
     param: input_file - nii/nii.gz file to predict
@@ -246,13 +264,7 @@ def predict_image(input_file, output, model, nnunet_verbose=True, use_gpu=True):
         checkpoint_name='checkpoint_best.pth',
     )
 
-    non_reorent_img, reoriented_image, original_affine, reoriented_affine, reorent_data = \
-      load_and_reorient(input_file, (2, 1, 0))
-
-    print(f'Original image shape is {non_reorent_img.shape}')
-    print(f'Reorient image shape is {reorent_data.shape}\n')
-
-    img_in = reoriented_image
+    img_in = nib.load(input_file)
     resample = 1.5
     nr_threads_resampling = 1
 
@@ -285,7 +297,6 @@ def predict_image(input_file, output, model, nnunet_verbose=True, use_gpu=True):
                   output_fname=f'{str(tmp_folder)}/reorient_pred.nii.gz',
                   properties=props)
 
-        # Read reorient mask with nibabel
         pred_reorient_img = nib.load(f'{str(tmp_folder)}/reorient_pred.nii.gz')
         pred_reorient_data = pred_reorient_img.get_fdata()
 
@@ -298,10 +309,12 @@ def predict_image(input_file, output, model, nnunet_verbose=True, use_gpu=True):
         print(f"from shape {pred_reorient_data.shape} to shape {mask_in_rsp.shape}")
         print(f"Resampled in {time.time() - st:.2f}s\n")
 
+        check_if_shape_and_affine_identical(img_in, mask_in_rsp)
+
         # Save results
         nib.save(mask_in_rsp, output)
 
-        del non_reorent_img, reoriented_image, img_in, img, props, predictor, pred, mask_in_rsp
+        del img_in, img, props, predictor, pred, mask_in_rsp
         gc.collect()
 
         print(f"Done in {time.time() - pt:.2f}s")
