@@ -12,19 +12,6 @@ read -p "Enter trainer you would like to choose (nnUNetTrainer, nnUNetTrainerNoM
 echo "Preprocess target dataset."
 nnUNetv2_plan_and_preprocess -d "$trg" -c "$config" --verify_dataset_integrity -np "$np"
 
-read -p "Do you want to customize training config? [y/n]: " is_new_conf
-if [[ "$is_new_conf" == "Y" || "$is_new_conf" == "y" ]]; then
-        echo "Creating custom config..."
-        echo "WARNING! New config will set 1.5mm as default spacing value."
-        read -p "Enter new batch size: " batch_size
-        read -p "Enter nnUNetPlans file path: " conf_path
-        python3 scripts/new_spacing.py "$conf_path" "$batch_size"
-        conf="3d_fullres_custom"
-        nnUNetv2_preprocess -d "$id" -c "$conf" -np "$np"
-else
-        echo "Cutstomization ignored."
-fi
-
 echo "Extract source dataset."
 nnUNetv2_extract_fingerprint -d "$src"
 echo "Move plans between datasets."

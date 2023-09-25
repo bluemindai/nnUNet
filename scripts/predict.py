@@ -12,12 +12,53 @@ from joblib import Parallel, delayed
 import importlib
 import numpy as np
 import time
+import os
 import gc
 
 cupy_available = importlib.util.find_spec("cupy") is not None
 cucim_available = importlib.util.find_spec("cucim") is not None
 
 gc.collect()
+
+labels = {
+    "bones": 1,
+    "arteries": 2,
+    "veins": 3,
+    "muscles": 4,
+    "spleen": 5,
+    "kidney_right": 6,
+    "kidney_left": 7,
+    "gallbladder": 8,
+    "liver": 9,
+    "liver_vessels": 10,
+    "stomach": 11,
+    "pancreas": 12,
+    "adrenal_gland_right": 13,
+    "adrenal_gland_left": 14,
+    "esophagus": 15,
+    "brain": 16,
+    "small_bowel": 17,
+    "duodenum": 18,
+    "colon": 19,
+    "urinary_bladder": 20,
+    "lung_upper_lobe_left": 21,
+    "lung_lower_lobe_left": 22,
+    "lung_upper_lobe_right": 23,
+    "lung_middle_lobe_right": 24,
+    "lung_lower_lobe_right": 25,
+    "lung_trachea_bronchia": 26,
+    "lung_vessels": 27,
+    "heart_myocardium": 28,
+    "heart_atrium_left": 29,
+    "heart_ventricle_left": 30,
+    "heart_atrium_right": 31,
+    "heart_ventricle_right": 32,
+    "liver_formation": 33,
+    "lung_formation": 34,
+    "kidney_formation": 35,
+    "pleural_effusion": 36,
+    "intracerebral_hemorrhage": 37
+}
 
 def resample_img(img, zoom=0.5, order=0, nr_cpus=-1):
     """
@@ -233,15 +274,15 @@ def check_if_shape_and_affine_identical(img_1, img_2):
         print(img_2.shape)
         print("WARNING: Output shape not equal to input shape. This should not happen.")
 
-def predict_image(input_file, output, model, nnunet_verbose=True, use_gpu=True):
+def predict_image(input_file, output, model, separate_masks=False ,nnunet_verbose=True, use_gpu=True):
     '''
     param: input_file - nii/nii.gz file to predict
-    param: output - the output distanation and filename (path/to/save/example.nii.gz)
+    param: output - the output distanation  (path/to/save/)
     param: model - the directory of nnunet trained model
     '''
 
     assert input_file.endswith('.nii') or input_file.endswith('.nii.gz'), f"Input file format error. Input file should endswith .nii or .nii.gz. Input file: {input_file}"
-    assert output.endswith('.nii') or output.endswith('.nii.gz'), f"Output file format error. Output file should endswith .nii or .nii.gz. Output file: {output}"
+    #assert output.endswith('.nii') or output.endswith('.nii.gz'), f"Output file format error. Output file should endswith .nii or .nii.gz. Output file: {output}"
 
     pt = time.time()
 
@@ -311,8 +352,15 @@ def predict_image(input_file, output, model, nnunet_verbose=True, use_gpu=True):
 
         check_if_shape_and_affine_identical(img_in, mask_in_rsp)
 
+        if separate_masks:
+            if not os.path.exists(os.path.join(output, 'segmentations')):
+                os.mkdir(os.path.join(output, 'segmentations'))
+            for label, indx in labels.items():
+                label_mask = np.array(mask_in_rsp.get_fdata() == indx).astype(np.uint8)
+                nib.save(nib.Nifti1Image(label_mask, img_in.affine), os.path.join(output, 'segmentations', label+'.nii.gz'))
+
         # Save results
-        nib.save(mask_in_rsp, output)
+        nib.save(mask_in_rsp, os.path.join(output, 'total.nii.gz'))
 
         del img_in, img, props, predictor, pred, mask_in_rsp
         gc.collect()

@@ -25,3 +25,5 @@ fi
 
 echo "Dataset prepared. Launching the train..."
 nnUNetv2_train "$id" --c "$conf" "$fold" -tr "$trainer" --npz
+
+# nnUNetv2_train 901 3d_fullres 0 -tr nnUNetTrainerDiceCELoss_noSmooth_150epochs -pretrained_weights /media/eolika/8224BB4D24BB42C9/BLUEMIND/nnUNet/trains/nnUNet_results/Dataset002_mosaicV1/nnUNetTrainerDiceCELoss_noSmooth_250epochs__nnUNetPlans__3d_fullres/fold_0/checkpoint_best.pth --npz
