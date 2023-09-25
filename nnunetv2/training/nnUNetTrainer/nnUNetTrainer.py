@@ -569,6 +569,14 @@ class nnUNetTrainer(object):
         # create dataset split
         tr_keys, val_keys = self.do_split()
 
+        self.num_iterations_per_epoch =  int(len(tr_keys) / self.batch_size)
+        self.num_val_iterations_per_epoch = int(len(val_keys)/ self.batch_size)
+
+        print()
+        print(f"Train iterations per epoch: {self.num_iterations_per_epoch}")
+        print(f"Val iterations per epoch: {self.num_val_iterations_per_epoch}")
+        print()
+
         # load the datasets for training and validation. Note that we always draw random samples so we really don't
         # care about distributing training cases across GPUs.
         dataset_tr = nnUNetDataset(self.preprocessed_dataset_folder, tr_keys,
