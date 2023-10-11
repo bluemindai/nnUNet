@@ -306,7 +306,7 @@ def predict_image(input_file, output, model, separate_masks=False ,nnunet_verbos
     )
 
     img_in = nib.load(input_file)
-    resample = 1.5
+    resample = 1.25
     nr_threads_resampling = 1
 
     with tempfile.TemporaryDirectory(prefix="mosaic_tmp_") as tmp_folder:

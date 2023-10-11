@@ -497,6 +497,21 @@ class ExperimentPlanner(object):
                     'previous_stage': '3d_lowres'
                 }
 
+        plans['configurations']['3d_fullres_mosaic'] = {
+                    'inherits_from': '3d_fullres',
+                    'batch_size': 2,
+                    "spacing": [1.25, 1.25, 1.25],
+                    "patch_size": [
+                        128,
+                        128,
+                        128
+                    ],
+                    "data_identifier": "nnUNetPlans_3d_fullres_mosaic"
+                }
+        print('3D fullres Mosaic U-Net configuration:')
+        print(plans['configurations']['3d_fullres_mosaic'])
+        print()
+
         self.plans = plans
         self.save_plans(plans)
         return plans

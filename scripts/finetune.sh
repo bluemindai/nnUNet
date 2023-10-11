@@ -3,7 +3,7 @@
 echo "Prepare target dataset on pretrained set."
 read -p "Enter source dataset: " src
 read -p "Enter target dataset: " trg
-read -p "Enter nnUNet configuration (2d, 3d_fullres, 3d_lowres or custom config): " config
+read -p "Enter nnUNet configuration (2d, 3d_fullres, 3d_lowres or custom 3d_fullres_mosaic config): " config
 read -p "Enter number of processes (1-20 but 18 is well enough): " np
 read -p "Path to weights: " weights
 read -p "Enter train fold (0 usually): " fold
