@@ -571,8 +571,10 @@ class nnUNetTrainer(object):
         # create dataset split
         tr_keys, val_keys = self.do_split()
 
-        self.num_iterations_per_epoch =  int(len(tr_keys) / self.batch_size)
-        self.num_val_iterations_per_epoch = int(len(val_keys)/ self.batch_size)
+        # use_all_steps = str(input('Do you want to step all data per epoch? (steps = len(data)/batch size): (y/n): '))
+        # if use_all_steps.lower() == 'y':
+        #     self.num_iterations_per_epoch =  int(len(tr_keys) / self.batch_size)
+        #     self.num_val_iterations_per_epoch = int(len(val_keys)/ self.batch_size)
 
         print()
         print(f"Train iterations per epoch: {self.num_iterations_per_epoch}")

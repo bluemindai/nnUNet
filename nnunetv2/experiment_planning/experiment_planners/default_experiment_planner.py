@@ -497,19 +497,114 @@ class ExperimentPlanner(object):
                     'previous_stage': '3d_lowres'
                 }
 
-        plans['configurations']['3d_fullres_mosaic'] = {
-                    'inherits_from': '3d_fullres',
-                    'batch_size': 2,
-                    "spacing": [1.25, 1.25, 1.25],
-                    "patch_size": [
-                        128,
-                        128,
-                        128
-                    ],
-                    "data_identifier": "nnUNetPlans_3d_fullres_mosaic"
-                }
-        print('3D fullres Mosaic U-Net configuration:')
-        print(plans['configurations']['3d_fullres_mosaic'])
+        plans['configurations']['3d_fullres_mosaic_spacing'] = {
+            'inherits_from': '3d_fullres',
+            "spacing": [1.25, 1.25, 1.25],
+            "data_identifier": "3d_fullres_mosaic_spacing"
+        }
+        print('3D fullres Mosaic spacing U-Net configuration:')
+        print(plans['configurations']['3d_fullres_mosaic_spacing'])
+        print()
+
+
+        plans['configurations']['3d_fullres_mosaic_arch2'] = {
+            'inherits_from': '3d_fullres',
+            'batch_size': 2,
+            "spacing": [1.25, 1.25, 1.25],
+            "patch_size": [128, 192, 192],
+            "UNet_base_num_features": 32,
+            "n_conv_per_stage_encoder": [
+                1,
+                1,
+                2,
+                3,
+                3,
+                3
+            ],
+            "n_conv_per_stage_decoder": [
+                1,
+                1,
+                1,
+                1,
+                1
+            ],
+            "num_pool_per_axis": [
+                4,
+                4,
+                4
+            ],
+            "pool_op_kernel_sizes": [
+                [
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    2,
+                    2,
+                    2
+                ],
+                [
+                    2,
+                    2,
+                    2
+                ],
+                [
+                    2,
+                    2,
+                    2
+                ],
+                [
+                    2,
+                    2,
+                    2
+                ],
+                [
+                    2,
+                    2,
+                    2
+                ]
+            ],
+            "conv_kernel_sizes": [
+                [
+                    3,
+                    3,
+                    3
+                ],
+                [
+                    3,
+                    3,
+                    3
+                ],
+                [
+                    3,
+                    3,
+                    3
+                ],
+                [
+                    3,
+                    3,
+                    3
+                ],
+                [
+                    3,
+                    3,
+                    3
+                ],
+                [
+                    3,
+                    3,
+                    3
+                ]
+            ],
+            "unet_max_num_features": 320,
+            "normalization_schemes": [
+                "CTNormalization"
+            ],
+            "data_identifier": "3d_fullres_mosaic_arch2"
+        }
+        print('3D fullres Mosaic ARCH2 U-Net configuration:')
+        print(plans['configurations']['3d_fullres_mosaic_arch2'])
         print()
 
         self.plans = plans
