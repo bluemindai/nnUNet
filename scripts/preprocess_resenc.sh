@@ -2,7 +2,7 @@
 
 echo "Prepare target dataset on pretrained set."
 read -p "Enter source dataset: " id
-read -p "Enter train config (ex. 3d_fullres, 3d_fullres_mosaic_resenc, 3d_fullres_mosaic_resenc_192x192x192_bs3_1mm): " conf
+read -p "Enter train config (ex. 3d_fullres, 3d_fullres_mosaic_resenc, 3d_fullres_mosaic_resenc_192x192x192_bs2_1mm): " conf
 read -p "Enter a number of processors to use: " np
 
 nnUNetv2_extract_fingerprint -d $id

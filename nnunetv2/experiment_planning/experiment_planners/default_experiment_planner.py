@@ -515,7 +515,7 @@ class ExperimentPlanner(object):
             'inherits_from': '3d_fullres',
             'batch_size': 2,
             "spacing": [1.0, 1.0, 1.0],
-            "patch_size": [128, 192, 192],
+            "patch_size": [192, 192, 192],
             "UNet_base_num_features": 32,
             "n_conv_per_stage_encoder": [
                 1,
@@ -635,7 +635,7 @@ class ExperimentPlanner(object):
         print(plans['configurations']['3d_fullres_mosaic_resenc'])
         print()
 
-        plans['configurations']["3d_fullres_mosaic_resenc_192x192x192_bs3_1mm"]= {
+        plans['configurations']["3d_fullres_mosaic_resenc_192x192x192_bs2_1mm"]= {
             "inherits_from": "3d_fullres_mosaic_resenc",
             "spacing": [1.0, 1.0, 1.0],
             "patch_size": [
@@ -643,7 +643,7 @@ class ExperimentPlanner(object):
                 192,
                 192
             ],
-            "batch_size": 3
+            "batch_size": 2
         }
 
         print('3D fullres Mosaic ResEncUnet 192x192x192 bs3 1mm')
