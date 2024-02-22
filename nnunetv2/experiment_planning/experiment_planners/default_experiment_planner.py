@@ -503,7 +503,7 @@ class ExperimentPlanner(object):
 
         plans['configurations']['3d_fullres_mosaic_spacing'] = {
             'inherits_from': '3d_fullres',
-            "spacing": [1.25, 1.25, 1.25],
+            "spacing": [1.0, 1.0, 1.0],
             "data_identifier": "3d_fullres_mosaic_spacing"
         }
         print('3D fullres Mosaic spacing U-Net configuration:')
