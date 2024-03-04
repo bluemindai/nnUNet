@@ -37,8 +37,8 @@ def plan_experiment_entry():
                         help='[OPTIONAL] Name of the Experiment Planner class that should be used. Default is '
                              '\'ExperimentPlanner\'. Note: There is no longer a distinction between 2d and 3d planner. '
                              'It\'s an all in one solution now. Wuch. Such amazing.')
-    parser.add_argument('-gpu_memory_target', default=8, type=float, required=False,
-                        help='[OPTIONAL] DANGER ZONE! Sets a custom GPU memory target. Default: 8 [GB]. Changing this will '
+    parser.add_argument('-gpu_memory_target', default=22, type=float, required=False,
+                        help='[OPTIONAL] DANGER ZONE! Sets a custom GPU memory target. Default: 22 [GB]. Changing this will '
                              'affect patch and batch size and will '
                              'definitely affect your models performance! Only use this if you really know what you '
                              'are doing and NEVER use this without running the default nnU-Net first (as a baseline).')
