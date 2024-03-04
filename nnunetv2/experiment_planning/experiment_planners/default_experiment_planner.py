@@ -541,108 +541,46 @@ class ExperimentPlanner(object):
         plans['configurations']['3d_fullres_mosaic_spacing'] = {
             'inherits_from': '3d_fullres',
             "spacing": [1.0, 1.0, 1.0],
+            "resampling_fn_data": "no_resampling_data_or_seg_to_shape",
+            "resampling_fn_seg": "no_resampling_data_or_seg_to_shape",
+            "resampling_fn_probabilities": "no_resampling_data_or_seg_to_shape",
             "data_identifier": "3d_fullres_mosaic_spacing"
         }
         print('3D fullres Mosaic spacing U-Net configuration:')
         print(plans['configurations']['3d_fullres_mosaic_spacing'])
         print()
 
-
         plans['configurations']['3d_fullres_mosaic_arch2'] = {
-            'inherits_from': '3d_fullres',
-            'batch_size': 2,
-            "spacing": [1.0, 1.0, 1.0],
-            "patch_size": [192, 192, 192],
-            "UNet_base_num_features": 32,
-            "n_conv_per_stage_encoder": [
-                1,
-                1,
-                2,
-                3,
-                3,
-                3
-            ],
-            "n_conv_per_stage_decoder": [
-                1,
-                1,
-                1,
-                1,
-                1
-            ],
-            "num_pool_per_axis": [
-                4,
-                4,
-                4
-            ],
-            "pool_op_kernel_sizes": [
-                [
-                    1,
-                    1,
-                    1
-                ],
-                [
-                    2,
-                    2,
-                    2
-                ],
-                [
-                    2,
-                    2,
-                    2
-                ],
-                [
-                    2,
-                    2,
-                    2
-                ],
-                [
-                    2,
-                    2,
-                    2
-                ],
-                [
-                    2,
-                    2,
-                    2
-                ]
-            ],
-            "conv_kernel_sizes": [
-                [
-                    3,
-                    3,
-                    3
-                ],
-                [
-                    3,
-                    3,
-                    3
-                ],
-                [
-                    3,
-                    3,
-                    3
-                ],
-                [
-                    3,
-                    3,
-                    3
-                ],
-                [
-                    3,
-                    3,
-                    3
-                ],
-                [
-                    3,
-                    3,
-                    3
-                ]
-            ],
-            "unet_max_num_features": 320,
-            "normalization_schemes": [
-                "CTNormalization"
-            ],
-            "data_identifier": "3d_fullres_mosaic_arch2"
+        'inherits_from': '3d_fullres',
+        'batch_size': 2,
+        "spacing": [1.0, 1.0, 1.0],
+        "patch_size": [192, 192, 192],
+        "UNet_base_num_features": 30,
+        "n_conv_per_stage_encoder": [2, 2, 2, 3, 3, 3],
+        "n_conv_per_stage_decoder": [3, 3, 3, 3, 3],
+        "num_pool_per_axis": [4, 4, 4],
+        "pool_op_kernel_sizes": [
+            [2, 2, 2],
+            [2, 2, 2],
+            [2, 2, 2],
+            [2, 2, 2],
+            [2, 2, 2],
+            [2, 2, 2]
+        ],
+        "conv_kernel_sizes": [
+            [3, 3, 3],
+            [3, 3, 3],
+            [3, 3, 3],
+            [3, 3, 3],
+            [3, 3, 3],
+            [3, 3, 3]
+        ],
+        "unet_max_num_features": 320,
+        "normalization_schemes": ["InstanceNormalization"],
+        "resampling_fn_data": "no_resampling_data_or_seg_to_shape",
+        "resampling_fn_seg": "no_resampling_data_or_seg_to_shape",
+        "resampling_fn_probabilities": "no_resampling_data_or_seg_to_shape",
+        "data_identifier": "3d_fullres_mosaic_arch2"
         }
         print('3D fullres Mosaic ARCH2 U-Net configuration:')
         print(plans['configurations']['3d_fullres_mosaic_arch2'])
@@ -842,6 +780,33 @@ class ExperimentPlanner(object):
 
         print('3D fullres Mosaic ResEncUnet Large No Resampling')
         print(plans['configurations']['3d_fullres_mosaic_resenc_large_NoRsmp'])
+        print()
+
+        plans['configurations']['3d_fullres_mosaic_arch2_ResEnc'] = {
+            "inherits_from": "3d_fullres_mosaic_arch2",
+            "UNet_class_name": "ResidualEncoderUNet",
+            "n_conv_per_stage_encoder": [
+                1,
+                3,
+                4,
+                6,
+                6,
+                6,
+                6
+            ],
+            "n_conv_per_stage_decoder": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                1
+            ],
+            "data_identifier": "3d_fullres_mosaic_arch2_ResEnc"
+        }
+
+        print('3D fullres Mosaic ARCH2 ResEncUnet')
+        print(plans['configurations']['3d_fullres_mosaic_arch2_ResEnc'])
         print()
 
         self.plans = plans
