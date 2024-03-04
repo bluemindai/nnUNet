@@ -671,6 +671,7 @@ class ExperimentPlanner(object):
             "resampling_fn_data": "no_resampling_data_or_seg_to_shape",
             "resampling_fn_seg": "no_resampling_data_or_seg_to_shape",
             "resampling_fn_probabilities": "no_resampling_data_or_seg_to_shape",
+            "data_identifier": "3d_fullres_mosaic_resenc_NoRsmp"
         }
 
         print('3D fullres Mosaic ResEncUnet')
@@ -685,7 +686,8 @@ class ExperimentPlanner(object):
                 192,
                 192
             ],
-            "batch_size": 2
+            "batch_size": 2,
+            "data_identifier": "3d_fullres_mosaic_resenc_192x192x192_bs2_1mm"
         }
 
         print('3D fullres Mosaic ResEncUnet 192x192x192 bs2 1mm')
