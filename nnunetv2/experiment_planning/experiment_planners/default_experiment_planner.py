@@ -649,7 +649,7 @@ class ExperimentPlanner(object):
         print()
 
         plans['configurations']['3d_fullres_mosaic_resenc_NoRsmp'] = {
-            "inherits_from": "3d_fullres",
+            "inherits_from": "3d_fullres_mosaic_spacing",
             "UNet_class_name": "ResidualEncoderUNet",
             "n_conv_per_stage_encoder": [
                 1,
