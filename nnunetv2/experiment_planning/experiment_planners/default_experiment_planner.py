@@ -556,7 +556,7 @@ class ExperimentPlanner(object):
         "spacing": [1.0, 1.0, 1.0],
         "patch_size": [192, 192, 192],
         "UNet_base_num_features": 32,
-        "n_conv_per_stage_encoder": [2, 2, 2, 3, 3, 3],
+        "n_conv_per_stage_encoder": [1, 1, 2, 3, 3, 3],
         "n_conv_per_stage_decoder": [3, 3, 3, 3, 3],
         "num_pool_per_axis": [4, 4, 4],
         "pool_op_kernel_sizes": [
@@ -577,6 +577,7 @@ class ExperimentPlanner(object):
         ],
         "unet_max_num_features": 320,
         "normalization_schemes": ["CTNormalization"],
+        "batch_dice": False,
         "resampling_fn_data": "no_resampling_data_or_seg_to_shape",
         "resampling_fn_seg": "no_resampling_data_or_seg_to_shape",
         "resampling_fn_probabilities": "no_resampling_data_or_seg_to_shape",
