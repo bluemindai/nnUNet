@@ -541,16 +541,13 @@ class ExperimentPlanner(object):
         plans['configurations']['3d_fullres_mosaic_spacing'] = {
             'inherits_from': '3d_fullres',
             "spacing": [1.0, 1.0, 1.0],
-            "resampling_fn_data": "no_resampling_data_or_seg_to_shape",
-            "resampling_fn_seg": "no_resampling_data_or_seg_to_shape",
-            "resampling_fn_probabilities": "no_resampling_data_or_seg_to_shape",
             "data_identifier": "3d_fullres_mosaic_spacing"
         }
         print('3D fullres Mosaic spacing U-Net configuration:')
         print(plans['configurations']['3d_fullres_mosaic_spacing'])
         print()
 
-        plans['configurations']['3d_fullres_mosaic_arch2'] = {
+        plans['configurations']['3d_fullres_mosaic_arch2_NoRsmp'] = {
         'inherits_from': '3d_fullres',
         'batch_size': 2,
         "spacing": [1.0, 1.0, 1.0],
@@ -584,7 +581,7 @@ class ExperimentPlanner(object):
         "data_identifier": "3d_fullres_mosaic_arch2"
         }
         print('3D fullres Mosaic ARCH2 U-Net configuration:')
-        print(plans['configurations']['3d_fullres_mosaic_arch2'])
+        print(plans['configurations']['3d_fullres_mosaic_arch2_NoRsmp'])
         print()
 
         plans['configurations']['3d_fullres_mosaic_resenc_NoRsmp'] = {
@@ -617,7 +614,7 @@ class ExperimentPlanner(object):
         print(plans['configurations']['3d_fullres_mosaic_resenc_NoRsmp'])
         print()
 
-        plans['configurations']["3d_fullres_mosaic_resenc_192x192x192_bs2_1mm"]= {
+        plans['configurations']["3d_fullres_mosaic_resenc_192x192x192_bs2_1mm_NoRsmp"]= {
             "inherits_from": "3d_fullres_mosaic_resenc_NoRsmp",
             "spacing": [1.0, 1.0, 1.0],
             "patch_size": [
@@ -630,7 +627,7 @@ class ExperimentPlanner(object):
         }
 
         print('3D fullres Mosaic ResEncUnet 192x192x192 bs2 1mm')
-        print(plans['configurations']['3d_fullres_mosaic_resenc_192x192x192_bs2_1mm'])
+        print(plans['configurations']['3d_fullres_mosaic_resenc_192x192x192_bs2_1mm_NoRsmp'])
         print()
 
         plans['configurations']["3d_fullres_mosaic_resenc_large_NoRsmp"]= {
@@ -783,8 +780,8 @@ class ExperimentPlanner(object):
         print(plans['configurations']['3d_fullres_mosaic_resenc_large_NoRsmp'])
         print()
 
-        plans['configurations']['3d_fullres_mosaic_arch2_ResEnc'] = {
-            "inherits_from": "3d_fullres_mosaic_arch2",
+        plans['configurations']['3d_fullres_mosaic_arch2_ResEnc_NoRsmp'] = {
+            "inherits_from": "3d_fullres_mosaic_arch2_NoRsmp",
             "UNet_class_name": "ResidualEncoderUNet",
             "n_conv_per_stage_encoder": [
                 1,
@@ -807,7 +804,7 @@ class ExperimentPlanner(object):
         }
 
         print('3D fullres Mosaic ARCH2 ResEncUnet')
-        print(plans['configurations']['3d_fullres_mosaic_arch2_ResEnc'])
+        print(plans['configurations']['3d_fullres_mosaic_arch2_ResEnc_NoRsmp'])
         print()
 
         self.plans = plans
