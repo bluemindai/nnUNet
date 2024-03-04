@@ -648,13 +648,14 @@ class ExperimentPlanner(object):
         print(plans['configurations']['3d_fullres_mosaic_arch2'])
         print()
 
-        plans['configurations']['3d_fullres_mosaic_resenc'] = {
+        plans['configurations']['3d_fullres_mosaic_resenc_NoRsmp'] = {
             "inherits_from": "3d_fullres",
             "UNet_class_name": "ResidualEncoderUNet",
             "n_conv_per_stage_encoder": [
                 1,
                 3,
                 4,
+                6,
                 6,
                 6,
                 6
@@ -664,16 +665,20 @@ class ExperimentPlanner(object):
                 1,
                 1,
                 1,
+                1,
                 1
-            ]
+            ],
+            "resampling_fn_data": "no_resampling_data_or_seg_to_shape",
+            "resampling_fn_seg": "no_resampling_data_or_seg_to_shape",
+            "resampling_fn_probabilities": "no_resampling_data_or_seg_to_shape",
         }
 
         print('3D fullres Mosaic ResEncUnet')
-        print(plans['configurations']['3d_fullres_mosaic_resenc'])
+        print(plans['configurations']['3d_fullres_mosaic_resenc_NoRsmp'])
         print()
 
         plans['configurations']["3d_fullres_mosaic_resenc_192x192x192_bs2_1mm"]= {
-            "inherits_from": "3d_fullres_mosaic_resenc",
+            "inherits_from": "3d_fullres_mosaic_resenc_NoRsmp",
             "spacing": [1.0, 1.0, 1.0],
             "patch_size": [
                 192,
@@ -683,8 +688,158 @@ class ExperimentPlanner(object):
             "batch_size": 2
         }
 
-        print('3D fullres Mosaic ResEncUnet 192x192x192 bs3 1mm')
-        print(plans['configurations']['3d_fullres_mosaic_resenc'])
+        print('3D fullres Mosaic ResEncUnet 192x192x192 bs2 1mm')
+        print(plans['configurations']['3d_fullres_mosaic_resenc_192x192x192_bs2_1mm'])
+        print()
+
+        plans['configurations']["3d_fullres_mosaic_resenc_large_NoRsmp"]= {
+            "inherits_from": "3d_fullres",
+            "spacing": [1.0, 1.0, 1.0],
+            "batch_size": 2,
+            "data_identifier": "nnUNetPlansNoRs_3d_fullres_mosaic_ResEnc",
+            "preprocessor_name": "DefaultPreprocessor",
+            "batch_size": 2,
+            "patch_size": [
+                128,
+                256,
+                256
+            ],
+            "median_image_size_in_voxels": [
+                128.0,
+                256.0,
+                256.0
+            ],
+            "normalization_schemes": [
+                "CTNormalization"
+            ],
+            "use_mask_for_norm": [
+                False
+            ],
+            "UNet_class_name": "ResidualEncoderUNet",
+            "UNet_base_num_features": 32,
+            "n_conv_per_stage_encoder": [
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2
+            ],
+            "n_conv_per_stage_decoder": [
+                2,
+                2,
+                2,
+                2,
+                2,
+                2
+            ],
+            "num_pool_per_axis": [
+                5,
+                6,
+                6
+            ],
+            "pool_op_kernel_sizes": [
+                [
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    2,
+                    2,
+                    2
+                ],
+                [
+                    2,
+                    2,
+                    2
+                ],
+                [
+                    2,
+                    2,
+                    2
+                ],
+                [
+                    2,
+                    2,
+                    2
+                ],
+                [
+                    2,
+                    2,
+                    2
+                ],
+                [
+                    1,
+                    2,
+                    2
+                ]
+            ],
+            "conv_kernel_sizes": [
+                [
+                    3,
+                    3,
+                    3
+                ],
+                [
+                    3,
+                    3,
+                    3
+                ],
+                [
+                    3,
+                    3,
+                    3
+                ],
+                [
+                    3,
+                    3,
+                    3
+                ],
+                [
+                    3,
+                    3,
+                    3
+                ],
+                [
+                    3,
+                    3,
+                    3
+                ],
+                [
+                    3,
+                    3,
+                    3
+                ]
+            ],
+            "unet_max_num_features": 320,
+            "resampling_fn_data": "no_resampling_data_or_seg_to_shape",
+            "resampling_fn_seg": "no_resampling_data_or_seg_to_shape",
+            "resampling_fn_data_kwargs": {
+                "is_seg": False,
+                "order": 3,
+                "order_z": 0,
+                "force_separate_z": None
+            },
+            "resampling_fn_seg_kwargs": {
+                "is_seg": True,
+                "order": 1,
+                "order_z": 0,
+                "force_separate_z": None
+            },
+            "resampling_fn_probabilities": "no_resampling_data_or_seg_to_shape",
+            "resampling_fn_probabilities_kwargs": {
+                "is_seg": False,
+                "order": 1,
+                "order_z": 0,
+                "force_separate_z": None
+            },
+            "batch_dice": False
+        }
+
+        print('3D fullres Mosaic ResEncUnet Large No Resampling')
+        print(plans['configurations']['3d_fullres_mosaic_resenc_large_NoRsmp'])
         print()
 
         self.plans = plans
