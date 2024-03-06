@@ -538,17 +538,25 @@ class ExperimentPlanner(object):
                     'previous_stage': '3d_lowres'
                 }
 
-        plans['configurations']['3d_fullres_mosaic_spacing'] = {
+        plans['configurations']['3d_fullres_no_resampling'] = {
             'inherits_from': '3d_fullres',
+            "resampling_fn_data": "no_resampling_data_or_seg_to_shape",
+            "resampling_fn_seg": "no_resampling_data_or_seg_to_shape",
+            "resampling_fn_probabilities": "no_resampling_data_or_seg_to_shape",
+            "data_identifier": "3d_fullres_no_resampling"
+        }
+
+        plans['configurations']['3d_fullres_mosaic_spacing_NoRsmp'] = {
+            'inherits_from': '3d_fullres_no_resampling',
             "spacing": [1.0, 1.0, 1.0],
-            "data_identifier": "3d_fullres_mosaic_spacing"
+            "data_identifier": "3d_fullres_mosaic_spacing_NoRsmp"
         }
         print('3D fullres Mosaic spacing U-Net configuration:')
-        print(plans['configurations']['3d_fullres_mosaic_spacing'])
+        print(plans['configurations']['3d_fullres_mosaic_spacing_NoRsmp'])
         print()
 
         plans['configurations']['3d_fullres_mosaic_arch2_NoRsmp'] = {
-        'inherits_from': '3d_fullres',
+        'inherits_from': '3d_fullres_no_resampling',
         'batch_size': 2,
         "spacing": [1.0, 1.0, 1.0],
         "patch_size": [192, 192, 192],
@@ -575,10 +583,7 @@ class ExperimentPlanner(object):
         "unet_max_num_features": 320,
         "normalization_schemes": ["CTNormalization"],
         "batch_dice": False,
-        "resampling_fn_data": "no_resampling_data_or_seg_to_shape",
-        "resampling_fn_seg": "no_resampling_data_or_seg_to_shape",
-        "resampling_fn_probabilities": "no_resampling_data_or_seg_to_shape",
-        "data_identifier": "3d_fullres_mosaic_arch2"
+        "data_identifier": "3d_fullres_mosaic_arch2_NoRsmp"
         }
         print('3D fullres Mosaic ARCH2 U-Net configuration:')
         print(plans['configurations']['3d_fullres_mosaic_arch2_NoRsmp'])
@@ -604,9 +609,6 @@ class ExperimentPlanner(object):
                 1,
                 1
             ],
-            "resampling_fn_data": "no_resampling_data_or_seg_to_shape",
-            "resampling_fn_seg": "no_resampling_data_or_seg_to_shape",
-            "resampling_fn_probabilities": "no_resampling_data_or_seg_to_shape",
             "data_identifier": "3d_fullres_mosaic_resenc_NoRsmp"
         }
 
