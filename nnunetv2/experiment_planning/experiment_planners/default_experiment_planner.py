@@ -546,13 +546,31 @@ class ExperimentPlanner(object):
             "data_identifier": "3d_fullres_no_resampling"
         }
 
-        plans['configurations']['3d_fullres_mosaic_spacing_NoRsmp'] = {
+        plans['configurations']['3d_fullres_mosaic_spacing_NoRsmp_highres'] = {
             'inherits_from': '3d_fullres_no_resampling',
             "spacing": [1.0, 1.0, 1.0],
-            "data_identifier": "3d_fullres_mosaic_spacing_NoRsmp"
+            "data_identifier": "3d_fullres_mosaic_spacing_NoRsmp_highres"
         }
-        print('3D fullres Mosaic spacing U-Net configuration:')
-        print(plans['configurations']['3d_fullres_mosaic_spacing_NoRsmp'])
+        print('3D fullres Mosaic HighRes spacing U-Net configuration:')
+        print(plans['configurations']['3d_fullres_mosaic_spacing_NoRsmp_highres'])
+        print()
+
+        plans['configurations']['3d_fullres_mosaic_spacing_NoRsmp_stdres'] = {
+        'inherits_from': '3d_fullres_no_resampling',
+        "spacing": [1.5, 1.5, 1.5],
+        "data_identifier": "3d_fullres_mosaic_spacing_NoRsmp_stdres"
+        }
+        print('3D fullres Mosaic StdRes spacing U-Net configuration:')
+        print(plans['configurations']['3d_fullres_mosaic_spacing_NoRsmp_stdres'])
+        print()
+
+        plans['configurations']['3d_fullres_mosaic_spacing_NoRsmp_lowres'] = {
+        'inherits_from': '3d_fullres_no_resampling',
+        "spacing": [3.0, 3.0, 3.0],
+        "data_identifier": "3d_fullres_mosaic_spacing_NoRsmp_lowres"
+        }
+        print('3D fullres Mosaic LowRes spacing U-Net configuration:')
+        print(plans['configurations']['3d_fullres_mosaic_spacing_NoRsmp_lowres'])
         print()
 
         plans['configurations']['3d_fullres_mosaic_arch2_NoRsmp'] = {
@@ -590,7 +608,7 @@ class ExperimentPlanner(object):
         print()
 
         plans['configurations']['3d_fullres_mosaic_resenc_NoRsmp'] = {
-            "inherits_from": "3d_fullres_mosaic_spacing",
+            "inherits_from": "3d_fullres_mosaic_spacing_NoRsmp",
             "UNet_class_name": "ResidualEncoderUNet",
             "n_conv_per_stage_encoder": [
                 1,
