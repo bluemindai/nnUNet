@@ -1,6 +1,7 @@
 import shutil
 from copy import deepcopy
 from typing import List, Union, Tuple
+import json
 
 import numpy as np
 import torch
@@ -538,293 +539,54 @@ class ExperimentPlanner(object):
                     'previous_stage': '3d_lowres'
                 }
 
-        plans['configurations']['3d_fullres_no_resampling'] = {
-            'inherits_from': '3d_fullres',
-            "resampling_fn_data": "no_resampling_data_or_seg_to_shape",
-            "resampling_fn_seg": "no_resampling_data_or_seg_to_shape",
-            "resampling_fn_probabilities": "no_resampling_data_or_seg_to_shape",
-            "data_identifier": "3d_fullres_no_resampling"
-        }
+        with open('configs/mosaic_planner.json') as f:
+            mosaic_planner = json.load(f)
 
-        plans['configurations']['3d_fullres_mosaic_spacing_NoRsmp_highres'] = {
-            'inherits_from': '3d_fullres_no_resampling',
-            "spacing": [1.0, 1.0, 1.0],
-            "data_identifier": "3d_fullres_mosaic_spacing_NoRsmp_highres"
-        }
-        print('3D fullres Mosaic HighRes spacing U-Net configuration:')
-        print(plans['configurations']['3d_fullres_mosaic_spacing_NoRsmp_highres'])
+        plans['configurations']['3d_fullres_no_resampling'] = mosaic_planner['3d_fullres_no_resampling']
+
+        plans['configurations']['3d_fullres_mosaic_spacing_highres_NoRsmp'] = mosaic_planner['3d_fullres_mosaic_spacing_highres_NoRsmp']
+        print('3D fullres Mosaic HighRes spacing No Resampling U-Net configuration:')
+        print(plans['configurations']['3d_fullres_mosaic_spacing_highres_NoRsmp'])
         print()
 
-        plans['configurations']['3d_fullres_mosaic_spacing_NoRsmp_stdres'] = {
-        'inherits_from': '3d_fullres_no_resampling',
-        "spacing": [1.5, 1.5, 1.5],
-        "data_identifier": "3d_fullres_mosaic_spacing_NoRsmp_stdres"
-        }
-        print('3D fullres Mosaic StdRes spacing U-Net configuration:')
-        print(plans['configurations']['3d_fullres_mosaic_spacing_NoRsmp_stdres'])
+        plans['configurations']['3d_fullres_mosaic_spacing_stdres_NoRsmp'] = mosaic_planner['3d_fullres_mosaic_spacing_stdres_NoRsmp']
+        print('3D fullres Mosaic StdRes spacing No Resampling U-Net configuration:')
+        print(plans['configurations']['3d_fullres_mosaic_spacing_stdres_NoRsmp'])
         print()
 
-        plans['configurations']['3d_fullres_mosaic_spacing_NoRsmp_lowres'] = {
-        'inherits_from': '3d_fullres_no_resampling',
-        "spacing": [3.0, 3.0, 3.0],
-        "data_identifier": "3d_fullres_mosaic_spacing_NoRsmp_lowres"
-        }
-        print('3D fullres Mosaic LowRes spacing U-Net configuration:')
-        print(plans['configurations']['3d_fullres_mosaic_spacing_NoRsmp_lowres'])
+        plans['configurations']['3d_fullres_mosaic_spacing_lowres_NoRsmp'] = mosaic_planner['3d_fullres_mosaic_spacing_lowres_NoRsmp']
+        print('3D fullres Mosaic LowRes spacing No Resampling U-Net configuration:')
+        print(plans['configurations']['3d_fullres_mosaic_spacing_lowres_NoRsmp'])
         print()
 
-        plans['configurations']['3d_fullres_mosaic_arch2_NoRsmp'] = {
-        'inherits_from': '3d_fullres_no_resampling',
-        'batch_size': 2,
-        "spacing": [1.0, 1.0, 1.0],
-        "patch_size": [192, 192, 192],
-        "UNet_base_num_features": 32,
-        "n_conv_per_stage_encoder": [1, 1, 2, 3, 3, 3],
-        "n_conv_per_stage_decoder": [3, 3, 3, 3, 3],
-        "num_pool_per_axis": [4, 4, 4],
-        "pool_op_kernel_sizes": [
-            [2, 2, 2],
-            [2, 2, 2],
-            [2, 2, 2],
-            [2, 2, 2],
-            [2, 2, 2],
-            [2, 2, 2]
-        ],
-        "conv_kernel_sizes": [
-            [3, 3, 3],
-            [3, 3, 3],
-            [3, 3, 3],
-            [3, 3, 3],
-            [3, 3, 3],
-            [3, 3, 3]
-        ],
-        "unet_max_num_features": 320,
-        "normalization_schemes": ["CTNormalization"],
-        "batch_dice": False,
-        "data_identifier": "3d_fullres_mosaic_arch2_NoRsmp"
-        }
-        print('3D fullres Mosaic ARCH2 U-Net configuration:')
+        plans['configurations']['3d_fullres_mosaic_spacing_highres_ResEnc_NoRsmp'] = mosaic_planner['3d_fullres_mosaic_spacing_highres_ResEnc_NoRsmp']
+        print('3D fullres Mosaic HighRes spacing No Resampling ResEnc U-Net configuration:')
+        print(plans['configurations']['3d_fullres_mosaic_spacing_highres_ResEnc_NoRsmp'])
+        print()
+
+        plans['configurations']['3d_fullres_mosaic_spacing_stdres_ResEnc_NoRsmp'] = mosaic_planner['3d_fullres_mosaic_spacing_stdres_ResEnc_NoRsmp']
+        print('3D fullres Mosaic StdRes spacing No Resampling ResEnc U-Net configuration:')
+        print(plans['configurations']['3d_fullres_mosaic_spacing_stdres_ResEnc_NoRsmp'])
+        print()
+
+        plans['configurations']['3d_fullres_mosaic_spacing_lowres_ResEnc_NoRsmp'] = mosaic_planner['3d_fullres_mosaic_spacing_lowres_ResEnc_NoRsmp']
+        print('3D fullres Mosaic LowRes spacing No Resampling ResEnc U-Net configuration:')
+        print(plans['configurations']['3d_fullres_mosaic_spacing_lowres_ResEnc_NoRsmp'])
+        print()
+
+        plans['configurations']['3d_fullres_mosaic_arch2_NoRsmp'] = mosaic_planner['3d_fullres_mosaic_arch2_NoRsmp']
+        print('3D fullres Mosaic ARCH2 No Resampling U-Net configuration:')
         print(plans['configurations']['3d_fullres_mosaic_arch2_NoRsmp'])
         print()
 
-        plans['configurations']['3d_fullres_mosaic_resenc_NoRsmp'] = {
-            "inherits_from": "3d_fullres_mosaic_spacing_NoRsmp",
-            "UNet_class_name": "ResidualEncoderUNet",
-            "n_conv_per_stage_encoder": [
-                1,
-                3,
-                4,
-                6,
-                6,
-                6,
-                6
-            ],
-            "n_conv_per_stage_decoder": [
-                1,
-                1,
-                1,
-                1,
-                1,
-                1
-            ],
-            "data_identifier": "3d_fullres_mosaic_resenc_NoRsmp"
-        }
-
-        print('3D fullres Mosaic ResEncUnet')
-        print(plans['configurations']['3d_fullres_mosaic_resenc_NoRsmp'])
-        print()
-
-        plans['configurations']["3d_fullres_mosaic_resenc_192x192x192_bs2_1mm_NoRsmp"]= {
-            "inherits_from": "3d_fullres_mosaic_resenc_NoRsmp",
-            "spacing": [1.0, 1.0, 1.0],
-            "patch_size": [
-                192,
-                192,
-                192
-            ],
-            "batch_size": 2,
-            "data_identifier": "3d_fullres_mosaic_resenc_192x192x192_bs2_1mm"
-        }
-
-        print('3D fullres Mosaic ResEncUnet 192x192x192 bs2 1mm')
-        print(plans['configurations']['3d_fullres_mosaic_resenc_192x192x192_bs2_1mm_NoRsmp'])
-        print()
-
-        plans['configurations']["3d_fullres_mosaic_resenc_large_NoRsmp"]= {
-            "inherits_from": "3d_fullres",
-            "spacing": [1.0, 1.0, 1.0],
-            "batch_size": 2,
-            "data_identifier": "nnUNetPlansNoRs_3d_fullres_mosaic_ResEnc",
-            "preprocessor_name": "DefaultPreprocessor",
-            "batch_size": 2,
-            "patch_size": [
-                128,
-                256,
-                256
-            ],
-            "median_image_size_in_voxels": [
-                128.0,
-                256.0,
-                256.0
-            ],
-            "normalization_schemes": [
-                "CTNormalization"
-            ],
-            "use_mask_for_norm": [
-                False
-            ],
-            "UNet_class_name": "ResidualEncoderUNet",
-            "UNet_base_num_features": 32,
-            "n_conv_per_stage_encoder": [
-                2,
-                2,
-                2,
-                2,
-                2,
-                2,
-                2
-            ],
-            "n_conv_per_stage_decoder": [
-                2,
-                2,
-                2,
-                2,
-                2,
-                2
-            ],
-            "num_pool_per_axis": [
-                5,
-                6,
-                6
-            ],
-            "pool_op_kernel_sizes": [
-                [
-                    1,
-                    1,
-                    1
-                ],
-                [
-                    2,
-                    2,
-                    2
-                ],
-                [
-                    2,
-                    2,
-                    2
-                ],
-                [
-                    2,
-                    2,
-                    2
-                ],
-                [
-                    2,
-                    2,
-                    2
-                ],
-                [
-                    2,
-                    2,
-                    2
-                ],
-                [
-                    1,
-                    2,
-                    2
-                ]
-            ],
-            "conv_kernel_sizes": [
-                [
-                    3,
-                    3,
-                    3
-                ],
-                [
-                    3,
-                    3,
-                    3
-                ],
-                [
-                    3,
-                    3,
-                    3
-                ],
-                [
-                    3,
-                    3,
-                    3
-                ],
-                [
-                    3,
-                    3,
-                    3
-                ],
-                [
-                    3,
-                    3,
-                    3
-                ],
-                [
-                    3,
-                    3,
-                    3
-                ]
-            ],
-            "unet_max_num_features": 320,
-            "resampling_fn_data": "no_resampling_data_or_seg_to_shape",
-            "resampling_fn_seg": "no_resampling_data_or_seg_to_shape",
-            "resampling_fn_data_kwargs": {
-                "is_seg": False,
-                "order": 3,
-                "order_z": 0,
-                "force_separate_z": None
-            },
-            "resampling_fn_seg_kwargs": {
-                "is_seg": True,
-                "order": 1,
-                "order_z": 0,
-                "force_separate_z": None
-            },
-            "resampling_fn_probabilities": "no_resampling_data_or_seg_to_shape",
-            "resampling_fn_probabilities_kwargs": {
-                "is_seg": False,
-                "order": 1,
-                "order_z": 0,
-                "force_separate_z": None
-            },
-            "batch_dice": False
-        }
-
-        print('3D fullres Mosaic ResEncUnet Large No Resampling')
-        print(plans['configurations']['3d_fullres_mosaic_resenc_large_NoRsmp'])
-        print()
-
-        plans['configurations']['3d_fullres_mosaic_arch2_ResEnc_NoRsmp'] = {
-            "inherits_from": "3d_fullres_mosaic_arch2_NoRsmp",
-            "UNet_class_name": "ResidualEncoderUNet",
-            "n_conv_per_stage_encoder": [
-                1,
-                3,
-                4,
-                6,
-                6,
-                6,
-                6
-            ],
-            "n_conv_per_stage_decoder": [
-                1,
-                1,
-                1,
-                1,
-                1,
-                1
-            ],
-            "data_identifier": "3d_fullres_mosaic_arch2_ResEnc"
-        }
-
-        print('3D fullres Mosaic ARCH2 ResEncUnet')
+        plans['configurations']['3d_fullres_mosaic_arch2_ResEnc_NoRsmp'] = mosaic_planner['3d_fullres_mosaic_arch2_ResEnc_NoRsmp']
+        print('3D fullres Mosaic ARCH2 ResEncUnet No Resampling')
         print(plans['configurations']['3d_fullres_mosaic_arch2_ResEnc_NoRsmp'])
+        print()
+
+        plans['configurations']["3d_fullres_mosaic_resenc_large_ResEnc_NoRsmp"] = mosaic_planner['3d_fullres_mosaic_resenc_large_ResEnc_NoRsmp']
+        print('3D fullres Mosaic ResEncUnet Large No Resampling')
+        print(plans['configurations']['3d_fullres_mosaic_resenc_large_ResEnc_NoRsmp'])
         print()
 
         self.plans = plans
