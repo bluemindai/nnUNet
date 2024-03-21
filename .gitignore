@@ -116,3 +116,4 @@ ENV/
 trains/
 .nnunetv2-venv/
 sanbox.ipynb
+!documentation/assets/scribble_example.png
