@@ -574,21 +574,6 @@ class ExperimentPlanner(object):
         print(plans['configurations']['3d_fullres_mosaic_spacing_lowres_ResEnc_NoRsmp'])
         print()
 
-        plans['configurations']['3d_fullres_mosaic_arch2_NoRsmp'] = mosaic_planner['3d_fullres_mosaic_arch2_NoRsmp']
-        print('3D fullres Mosaic ARCH2 No Resampling U-Net configuration:')
-        print(plans['configurations']['3d_fullres_mosaic_arch2_NoRsmp'])
-        print()
-
-        plans['configurations']['3d_fullres_mosaic_arch2_ResEnc_NoRsmp'] = mosaic_planner['3d_fullres_mosaic_arch2_ResEnc_NoRsmp']
-        print('3D fullres Mosaic ARCH2 ResEncUnet No Resampling')
-        print(plans['configurations']['3d_fullres_mosaic_arch2_ResEnc_NoRsmp'])
-        print()
-
-        plans['configurations']["3d_fullres_mosaic_resenc_large_ResEnc_NoRsmp"] = mosaic_planner['3d_fullres_mosaic_resenc_large_ResEnc_NoRsmp']
-        print('3D fullres Mosaic ResEncUnet Large No Resampling')
-        print(plans['configurations']['3d_fullres_mosaic_resenc_large_ResEnc_NoRsmp'])
-        print()
-
         self.plans = plans
         self.save_plans(plans)
         return plans
