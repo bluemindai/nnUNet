@@ -45,4 +45,4 @@ nnUNetv2_plan_and_preprocess -d "$id" \
     -gpu_memory_target "$gpu_mem" \
     -overwrite_plans_name "Mosaic_${planner}_${res}res_NoRsmp_${gpu_mem}G" \
     -np "$np" \
-    --verify_dataset_integrity
+    #--verify_dataset_integrity
