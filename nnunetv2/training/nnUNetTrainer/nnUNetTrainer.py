@@ -68,6 +68,10 @@ from nnunetv2.utilities.helpers import empty_cache, dummy_context
 from nnunetv2.utilities.label_handling.label_handling import convert_labelmap_to_one_hot, determine_num_input_channels
 from nnunetv2.utilities.plans_handling.plans_handler import PlansManager
 
+import gc
+import os
+os.environ['PYTORCH_CUDA_ALLOC_CONF'] = 'expandable_segments:True'
+
 
 class nnUNetTrainer(object):
     def __init__(self, plans: dict, configuration: str, fold: int, dataset_json: dict, unpack_dataset: bool = True,
@@ -1347,7 +1351,20 @@ class nnUNetTrainer(object):
     def run_training(self):
         self.on_train_start()
 
+        try:
+            import cupy as cp
+            cp._default_memory_pool.free_all_blocks()
+        except ImportError:
+            # no cupy installed. skipping GPU cleanup
+            pass
+
+        torch.cuda.empty_cache()
+        gc.collect()
+
         for epoch in range(self.current_epoch, self.num_epochs):
+            torch.cuda.empty_cache()
+            gc.collect()
+
             self.on_epoch_start()
 
             self.on_train_epoch_start()
