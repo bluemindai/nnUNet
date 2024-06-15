@@ -559,21 +559,6 @@ class ExperimentPlanner(object):
         print(plans['configurations']['3d_fullres_mosaic_spacing_lowres_NoRsmp'])
         print()
 
-        plans['configurations']['3d_fullres_mosaic_spacing_highres_ResEnc_NoRsmp'] = mosaic_planner['3d_fullres_mosaic_spacing_highres_ResEnc_NoRsmp']
-        print('3D fullres Mosaic HighRes spacing No Resampling ResEnc U-Net configuration:')
-        print(plans['configurations']['3d_fullres_mosaic_spacing_highres_ResEnc_NoRsmp'])
-        print()
-
-        plans['configurations']['3d_fullres_mosaic_spacing_stdres_ResEnc_NoRsmp'] = mosaic_planner['3d_fullres_mosaic_spacing_stdres_ResEnc_NoRsmp']
-        print('3D fullres Mosaic StdRes spacing No Resampling ResEnc U-Net configuration:')
-        print(plans['configurations']['3d_fullres_mosaic_spacing_stdres_ResEnc_NoRsmp'])
-        print()
-
-        plans['configurations']['3d_fullres_mosaic_spacing_lowres_ResEnc_NoRsmp'] = mosaic_planner['3d_fullres_mosaic_spacing_lowres_ResEnc_NoRsmp']
-        print('3D fullres Mosaic LowRes spacing No Resampling ResEnc U-Net configuration:')
-        print(plans['configurations']['3d_fullres_mosaic_spacing_lowres_ResEnc_NoRsmp'])
-        print()
-
         self.plans = plans
         self.save_plans(plans)
         return plans
