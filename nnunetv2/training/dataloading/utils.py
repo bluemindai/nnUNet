@@ -10,11 +10,12 @@ from batchgenerators.utilities.file_and_folder_operations import isfile, subfile
 from nnunetv2.configuration import default_num_processes
 
 # FOR CLUSTER TRAIN
-try:
-   multiprocessing.set_start_method('spawn', force=True)
-   print("multiprocessing: spawned")
-except RuntimeError:
-   pass
+if os.environ['nnUNet_spawn_proc'].lower() in ('true', '1', 't'):
+    try:
+        multiprocessing.set_start_method('spawn', force=True)
+        print("multiprocessing: spawned")
+    except RuntimeError:
+        pass
 
 def _convert_to_npy(npz_file: str, unpack_segmentation: bool = True, overwrite_existing: bool = False,
                     verify_npy: bool = False, fail_ctr: int = 0) -> None:
