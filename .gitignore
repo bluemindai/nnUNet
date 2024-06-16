@@ -115,5 +115,13 @@ ENV/
 
 trains/
 .nnunetv2-venv/
+.venv_s3/
 sanbox.ipynb
 !documentation/assets/scribble_example.png
+# s3 files
+config.yaml
+train_s3.sh
+build-and-push.yc.sh
+Dockerfile
+.dockerignore
+s3_logs_[0-3][0-9].[0-1][0-9].[0-9][0-9][0-9][0-9]-[0-2][0-9]:[0-5][0-9]:[0-5][0-9]/
