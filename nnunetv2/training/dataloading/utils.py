@@ -10,7 +10,8 @@ from batchgenerators.utilities.file_and_folder_operations import isfile, subfile
 from nnunetv2.configuration import default_num_processes
 
 # FOR CLUSTER TRAIN
-if os.environ['nnUNet_spawn_proc'].lower() in ('true', '1', 't'):
+if ('nnUNet_spawn_proc' in os.environ.keys()) \
+    and (os.environ['nnUNet_spawn_proc'].lower() in ('true', '1', 't')):
     try:
         multiprocessing.set_start_method('spawn', force=True)
         print("multiprocessing: spawned")

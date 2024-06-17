@@ -16,7 +16,8 @@ from nnunetv2.utilities.find_class_by_name import recursive_find_python_class
 from torch.backends import cudnn
 
 # FOR CLUSTER TRAIN
-if os.environ['nnUNet_spawn_proc'].lower() in ('true', '1', 't'):
+if ('nnUNet_spawn_proc' in os.environ.keys()) \
+    and (os.environ['nnUNet_spawn_proc'].lower() in ('true', '1', 't')):
     try:
         multiprocessing.set_start_method('spawn', force=True)
         print("multiprocessing: spawned")
