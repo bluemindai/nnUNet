@@ -1,13 +1,14 @@
 [project]
-name = "nnunetv2"
-version = "2.5"
+name = "nnunetv2-bm-custom"
+version = "2.5.1"
 requires-python = ">=3.9"
 description = "nnU-Net is a framework for out-of-the box image segmentation."
 readme = "README.md"
 license = { file = "LICENSE" }
 authors = [
     { name = "Fabian Isensee", email = "f.isensee@dkfz-heidelberg.de"},
-    { name = "Helmholtz Imaging Applied Computer Vision Lab" }
+    { name = "Helmholtz Imaging Applied Computer Vision Lab" },
+    { name = "Roman Fitzjalen BlueMind AI Inc" }
 ]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -59,7 +60,7 @@ exclude = [".nnunetv2-venv", "trains"]
 
 [project.urls]
 homepage = "https://github.com/MIC-DKFZ/nnUNet"
-repository = "https://github.com/MIC-DKFZ/nnUNet"
+repository = "https://github.com/bluemindai/nnUNet"
 
 [project.scripts]
 nnUNetv2_plan_and_preprocess = "nnunetv2.experiment_planning.plan_and_preprocess_entrypoints:plan_and_preprocess_entry"
