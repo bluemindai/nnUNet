@@ -544,19 +544,19 @@ class ExperimentPlanner(object):
 
         plans['configurations']['3d_fullres_no_resampling'] = mosaic_planner['3d_fullres_no_resampling']
 
-        plans['configurations']['3d_fullres_mosaic_spacing_highres_NoRsmp'] = mosaic_planner['3d_fullres_mosaic_spacing_highres_NoRsmp']
+        plans['configurations']['3d_fullres_highres_NoRsmp'] = mosaic_planner['3d_fullres_highres_NoRsmp']
         print('3D fullres Mosaic HighRes spacing No Resampling U-Net configuration:')
-        print(plans['configurations']['3d_fullres_mosaic_spacing_highres_NoRsmp'])
+        print(plans['configurations']['3d_fullres_highres_NoRsmp'])
         print()
 
-        plans['configurations']['3d_fullres_mosaic_spacing_stdres_NoRsmp'] = mosaic_planner['3d_fullres_mosaic_spacing_stdres_NoRsmp']
+        plans['configurations']['3d_fullres_stdres_NoRsmp'] = mosaic_planner['3d_fullres_stdres_NoRsmp']
         print('3D fullres Mosaic StdRes spacing No Resampling U-Net configuration:')
-        print(plans['configurations']['3d_fullres_mosaic_spacing_stdres_NoRsmp'])
+        print(plans['configurations']['3d_fullres_stdres_NoRsmp'])
         print()
 
-        plans['configurations']['3d_fullres_mosaic_spacing_lowres_NoRsmp'] = mosaic_planner['3d_fullres_mosaic_spacing_lowres_NoRsmp']
+        plans['configurations']['3d_fullres_lowres_NoRsmp'] = mosaic_planner['3d_fullres_lowres_NoRsmp']
         print('3D fullres Mosaic LowRes spacing No Resampling U-Net configuration:')
-        print(plans['configurations']['3d_fullres_mosaic_spacing_lowres_NoRsmp'])
+        print(plans['configurations']['3d_fullres_lowres_NoRsmp'])
         print()
 
         self.plans = plans

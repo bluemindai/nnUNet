@@ -2,23 +2,26 @@
     "3d_fullres_no_resampling": {
         "inherits_from": "3d_fullres",
         "resampling_fn_data": "no_resampling_data_or_seg_to_shape",
+        "resampling_fn_data_kwargs": {},
         "resampling_fn_seg": "no_resampling_data_or_seg_to_shape",
+        "resampling_fn_seg_kwargs": {},
         "resampling_fn_probabilities": "no_resampling_data_or_seg_to_shape",
-        "data_identifier": "3d_fullres_no_resampling"
+        "resampling_fn_probabilities_kwargs": {},
+        "data_identifier": "nnUNetPlans_3d_fullres_NoRsmp"
     },
-    "3d_fullres_mosaic_spacing_highres_NoRsmp": {
+    "3d_fullres_highres_NoRsmp": {
         "inherits_from": "3d_fullres_no_resampling",
         "spacing": [1.0, 1.0, 1.0],
-        "data_identifier": "3d_fullres_mosaic_spacing_highres_NoRsmp"
+        "data_identifier": "nnUNetPlans_3d_fullres_highres_NoRsmp"
     },
-    "3d_fullres_mosaic_spacing_stdres_NoRsmp": {
+    "3d_fullres_stdres_NoRsmp": {
         "inherits_from": "3d_fullres_no_resampling",
         "spacing": [1.5, 1.5, 1.5],
-        "data_identifier": "3d_fullres_mosaic_spacing_stdres_NoRsmp"
+        "data_identifier": "nnUNetPlans_3d_fullres_stdres_NoRsmp"
     },
-    "3d_fullres_mosaic_spacing_lowres_NoRsmp": {
+    "3d_fullres_lowres_NoRsmp": {
         "inherits_from": "3d_fullres_no_resampling",
         "spacing": [3.0, 3.0, 3.0],
-        "data_identifier": "3d_fullres_mosaic_spacing_lowres_NoRsmp"
+        "data_identifier": "nnUNetPlans_3d_fullres_lowres_NoRsmp"
     }
 }

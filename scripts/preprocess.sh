@@ -3,34 +3,38 @@
 echo "Mosaic Preprocessor. Be sure you have a dataset.json file in the raw directory!"
 read -p "Enter dataset id: " id
 read -p "Enter resolution (low | std | high): " res
+read -p "Enter configuration (press Enter to set automatically): " config
 read -p "Enter planner (press Enter to set automatically): " planner
 read -p "Enter GPU memory (press Enter to set automatically): " gpu_mem
-read -p "Enter number of processes (1-20, press Enter to use default 4): " np
+read -p "Enter number of processes (1-20, press Enter to use default 8): " np
 
 # Устанавливаем количество процессов по умолчанию, если не указано
-[[ -z "$np" ]] && np=4
+[[ -z "$np" ]] && np=8
 
 declare -a spacing
 
-# Настройка разрешения, планировщика и автоматическое определение памяти
+# Настройка разрешения, планировщика, автоматическое определение памяти и конфигурации флага
 case "$res" in
     low)
         echo -e "\nLow resolution selected. Setting spacing at 3.0 3.0 3.0"
         spacing=(3.0 3.0 3.0)
         [[ -z "$planner" ]] && planner="nnUNetPlannerResEncM"
         [[ -z "$gpu_mem" ]] && gpu_mem=12
+        [[ -z "$config" ]] && config="3d_fullres_lowres_NoRsmp"
         ;;
     std)
         echo -e "\nStandard resolution selected. Setting spacing at 1.5 1.5 1.5"
         spacing=(1.5 1.5 1.5)
         [[ -z "$planner" ]] && planner="nnUNetPlannerResEncL"
         [[ -z "$gpu_mem" ]] && gpu_mem=24
+        [[ -z "$config" ]] && config="3d_fullres_stdres_NoRsmp"
         ;;
     high)
         echo -e "\nHigh resolution selected. Setting spacing at 1.0 1.0 1.0"
         spacing=(1.0 1.0 1.0)
         [[ -z "$planner" ]] && planner="nnUNetPlannerResEncXL"
         [[ -z "$gpu_mem" ]] && gpu_mem=40
+        [[ -z "$config" ]] && config="3d_fullres_highres_NoRsmp"
         ;;
     *)
         echo -e "\nInvalid resolution option."
@@ -39,7 +43,7 @@ case "$res" in
 esac
 
 nnUNetv2_plan_and_preprocess -d "$id" \
-    -c 3d_fullres \
+    -c "$config" \
     -pl "$planner" \
     -overwrite_target_spacing "${spacing[@]}" \
     -gpu_memory_target "$gpu_mem" \

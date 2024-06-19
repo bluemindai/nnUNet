@@ -21,6 +21,6 @@ export nnUNet_results="/bluemind/nnunet/trains/nnUNet_results"
 Use [generate_json](scripts/generate_json.ipynb) for this.
 
 4. #### Use scripts for training.
-There are several scripts written by me (Roma) for datgaset  [preprocessing](scripts/preprocess_data.sh), [training](scripts/train.sh), [finetuning](scripts/finetune.sh) and [predicting](scripts/predict.py).
+There are several scripts written by me (Roma) for datgaset  [preprocessing](scripts/preprocess.sh), [training](scripts/train.sh), [finetuning](scripts/finetune.sh).
 
 ### READ NNUUNET [README](readme.md) FOR MORE INFORMATION
