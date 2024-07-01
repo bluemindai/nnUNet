@@ -43,20 +43,18 @@ esac
 # Adding custom plans options
 echo "Select plan:
 0 - nnUNetPlans
-1 - nnUNetPlans_3d_fullres_NoRsmp
-2 - nnUNetPlans_3d_fullres_highres_NoRsmp
-3 - nnUNetPlans_3d_fullres_stdres_NoRsmp
-4 - nnUNetPlans_3d_fullres_lowres_NoRsmp
-5 - Custom plan"
+1 - nnUNetPlans_3d_fullres_highres_NoRsmp
+2 - nnUNetPlans_3d_fullres_stdres_NoRsmp
+3 - nnUNetPlans_3d_fullres_lowres_NoRsmp
+4 - Custom plan"
 read -p "Enter plan number (Press enter to set default 0 - nnUNetPlans): " plan_num
 
 case "$plan_num" in
     0) plans="nnUNetPlans" ;;
-    1) plans="nnUNetPlans_3d_fullres_NoRsmp" ;;
-    2) plans="nnUNetPlans_3d_fullres_highres_NoRsmp" ;;
-    3) plans="nnUNetPlans_3d_fullres_stdres_NoRsmp" ;;
-    4) plans="nnUNetPlans_3d_fullres_lowres_NoRsmp" ;;
-    5) read -p "Enter custom plan name: " custom_plan
+    1) plans="Mosaic_nnUNetPlannerResEncXL_stdres_NoRsmp_40G" ;;
+    2) plans="Mosaic_nnUNetPlannerResEncL_stdres_NoRsmp_24G" ;;
+    3) plans="Mosaic_nnUNetPlannerResEncM_stdres_NoRsmp_12G" ;;
+    4) read -p "Enter custom plan name: " custom_plan
        if [[ -z "$custom_plan" ]]; then
            echo "Error: Custom plan name is required."
            exit 1
