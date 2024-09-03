@@ -77,4 +77,4 @@ case "$trainer_num" in
 esac
 
 echo "Launching the training process..."
-nnUNetv2_train "$id" "$conf" "$fold" -p "$plans" -tr "$trainer"
+nnUNetv2_train "$id" "$conf" "$fold" -p "$plans" -tr "$trainer" --val_best

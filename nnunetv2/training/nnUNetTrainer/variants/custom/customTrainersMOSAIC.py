@@ -1,6 +1,7 @@
 import torch
 
 from nnunetv2.training.nnUNetTrainer.nnUNetTrainer import nnUNetTrainer
+from nnunetv2.training.nnUNetTrainer.variants.loss.nnUNetTrainerDiceLoss import *
 
 class nnUNetTrainer_MOSAIC_3k(nnUNetTrainer):
     def __init__(self, plans: dict, configuration: str, fold: int, dataset_json: dict, unpack_dataset: bool = True,
@@ -65,6 +66,21 @@ class nnUNetTrainer_MOSAIC_500_QuarterLR(nnUNetTrainer):
         self.num_epochs = 500
 
 class nnUNetTrainer_MOSAIC_500_QuarterLR_NoMirroring(nnUNetTrainer):
+    def __init__(self, plans: dict, configuration: str, fold: int, dataset_json: dict, unpack_dataset: bool = True,
+                 device: torch.device = torch.device('cuda')):
+        super().__init__(plans, configuration, fold, dataset_json, unpack_dataset, device)
+        self.initial_lr = 2.5e-3
+        self.num_epochs = 500
+
+        def configure_rotation_dummyDA_mirroring_and_inital_patch_size(self):
+            rotation_for_DA, do_dummy_2d_data_aug, initial_patch_size, mirror_axes = \
+                super().configure_rotation_dummyDA_mirroring_and_inital_patch_size()
+            mirror_axes = None
+            self.inference_allowed_mirroring_axes = None
+            return rotation_for_DA, do_dummy_2d_data_aug, initial_patch_size, mirror_axes
+        
+
+class nnUNetTrainer_MOSAIC_500_QuarterLR_NoMirroring_noSmooth(nnUNetTrainerDiceCELoss_noSmooth):
     def __init__(self, plans: dict, configuration: str, fold: int, dataset_json: dict, unpack_dataset: bool = True,
                  device: torch.device = torch.device('cuda')):
         super().__init__(plans, configuration, fold, dataset_json, unpack_dataset, device)
