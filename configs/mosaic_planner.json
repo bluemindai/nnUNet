@@ -23,5 +23,20 @@
         "inherits_from": "3d_fullres_no_resampling",
         "spacing": [3.0, 3.0, 3.0],
         "data_identifier": "nnUNetPlans_3d_fullres_lowres_NoRsmp"
+    },
+    "3d_fullres_highres": {
+        "inherits_from": "3d_fullres",
+        "spacing": [1.0, 1.0, 1.0],
+        "data_identifier": "nnUNetPlans_3d_fullres_highres"
+    },
+    "3d_fullres_stdres": {
+        "inherits_from": "3d_fullres",
+        "spacing": [1.5, 1.5, 1.5],
+        "data_identifier": "nnUNetPlans_3d_fullres_stdres"
+    },
+    "3d_fullres_lowres": {
+        "inherits_from": "3d_fullres",
+        "spacing": [3.0, 3.0, 3.0],
+        "data_identifier": "nnUNetPlans_3d_fullres_lowres"
     }
 }

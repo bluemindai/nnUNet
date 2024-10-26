@@ -89,9 +89,14 @@ def compute_tp_fp_fn_tn(mask_ref: np.ndarray, mask_pred: np.ndarray, ignore_mask
 def compute_metrics(reference_file: str, prediction_file: str, image_reader_writer: BaseReaderWriter,
                     labels_or_regions: Union[List[int], List[Union[int, Tuple[int, ...]]]],
                     ignore_label: int = None) -> dict:
-    # load images
+
     seg_ref, seg_ref_dict = image_reader_writer.read_seg(reference_file)
     seg_pred, seg_pred_dict = image_reader_writer.read_seg(prediction_file)
+
+    voxel_spacing_ref = seg_ref_dict.get('spacing', None)
+    voxel_spacing_pred = seg_pred_dict.get('spacing', None)
+    if not np.allclose(voxel_spacing_ref, voxel_spacing_pred):
+        raise ValueError(f"Voxel spacing of reference and prediction do not match. Reference spacing: {voxel_spacing_ref} | Predictions spacing: {voxel_spacing_pred}")
 
     ignore_mask = seg_ref == ignore_label if ignore_label is not None else None
 
@@ -116,6 +121,7 @@ def compute_metrics(reference_file: str, prediction_file: str, image_reader_writ
         results['metrics'][r]['TN'] = tn
         results['metrics'][r]['n_pred'] = fp + tp
         results['metrics'][r]['n_ref'] = fn + tp
+
     return results
 
 

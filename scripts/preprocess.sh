@@ -3,6 +3,7 @@
 echo "Mosaic Preprocessor. Be sure you have a dataset.json file in the raw directory!"
 read -p "Enter dataset id: " id
 read -p "Enter resolution (low | std | high): " res
+read -p "Enter resample (default | NoResample): " resample
 read -p "Enter configuration (press Enter to set automatically): " config
 read -p "Enter planner (press Enter to set automatically): " planner
 read -p "Enter GPU memory (press Enter to set automatically): " gpu_mem
@@ -42,11 +43,27 @@ case "$res" in
         ;;
 esac
 
+# Обработка параметра resample
+case "$resample" in
+    default)
+        echo -e "\nResample option 'default' selected."
+        planner="${planner}"
+        config="${config/_NoRsmp/}"
+        ;;
+    NoResample)
+        echo -e "\nResample option 'NoResample' selected."
+        ;;
+    *)
+        echo -e "\nInvalid resample option."
+        exit 1
+        ;;
+esac
+
 nnUNetv2_plan_and_preprocess -d "$id" \
     -c "$config" \
     -pl "$planner" \
     -overwrite_target_spacing "${spacing[@]}" \
     -gpu_memory_target "$gpu_mem" \
-    -overwrite_plans_name "Mosaic_${planner}_${res}res_NoRsmp_${gpu_mem}G" \
+    -overwrite_plans_name "Mosaic_${planner}_${res}res_${resample}_${gpu_mem}G" \
     -np "$np" \
     --verify_dataset_integrity
