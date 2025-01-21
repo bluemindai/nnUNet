@@ -114,7 +114,7 @@ ENV/
 *.model
 
 trains/
-.nnunetv2-venv/
+.nnunet_venv/
 .venv-s3/
 sanbox.ipynb
 !documentation/assets/scribble_example.png
