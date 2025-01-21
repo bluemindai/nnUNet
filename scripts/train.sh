@@ -22,7 +22,10 @@ echo "Select trainer:
 4 - nnUNetTrainer_750epochs_NoMirroring
 5 - nnUNetTrainer_2000epochs_NoMirroring
 6 - nnUNetTrainer_4000epochs_NoMirroring
-7 - nnUNetTrainer_8000epochs_NoMirroring"
+7 - nnUNetTrainer_8000epochs_NoMirroring
+8 - nnUNetTrainer_onlyMirror01
+9 - nnUNetTrainer_onlyMirror01_DASegOrd0
+10 - nnUNetTrainer_DASegOrd0_NoMirroring"
 read -p "Enter trainer number: " trainer_num
 
 read -p "Enter train fold ([0-4] or all usually): " fold
@@ -51,9 +54,9 @@ read -p "Enter plan number (Press enter to set default 0 - nnUNetPlans): " plan_
 
 case "$plan_num" in
     0) plans="nnUNetPlans" ;;
-    1) plans="Mosaic_nnUNetPlannerResEncXL_stdres_NoRsmp_40G" ;;
-    2) plans="Mosaic_nnUNetPlannerResEncL_stdres_NoRsmp_24G" ;;
-    3) plans="Mosaic_nnUNetPlannerResEncM_stdres_NoRsmp_12G" ;;
+    1) plans="MOSAIC_nnUNetPlannerResEncXL_stdres_NoRsmp_40G" ;;
+    2) plans="MOSAIC_nnUNetPlannerResEncL_stdres_NoRsmp_24G" ;;
+    3) plans="MOSAIC_nnUNetPlannerResEncM_stdres_NoRsmp_12G" ;;
     4) read -p "Enter custom plan name: " custom_plan
        if [[ -z "$custom_plan" ]]; then
            echo "Error: Custom plan name is required."
@@ -73,6 +76,9 @@ case "$trainer_num" in
     5) trainer="nnUNetTrainer_2000epochs_NoMirroring" ;;
     6) trainer="nnUNetTrainer_4000epochs_NoMirroring" ;;
     7) trainer="nnUNetTrainer_8000epochs_NoMirroring" ;;
+    8) trainer="nnUNetTrainer_onlyMirror01" ;;
+    9) trainer="nnUNetTrainer_onlyMirror01_DASegOrd0" ;;
+    10) trainer="nnUNetTrainer_DASegOrd0_NoMirroring" ;;
     *) echo "Error: Invalid trainer number."; exit 1 ;;
 esac
 
