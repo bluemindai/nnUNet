@@ -50,8 +50,8 @@ case "$resample" in
         planner="${planner}"
         config="${config/_NoRsmp/}"
         ;;
-    NoResample)
-        echo -e "\nResample option 'NoResample' selected."
+    NoRsmp)
+        echo -e "\nResample option 'NoRsmp' selected."
         ;;
     *)
         echo -e "\nInvalid resample option."
