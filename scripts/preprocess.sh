@@ -3,7 +3,7 @@
 echo "Mosaic Preprocessor. Be sure you have a dataset.json file in the raw directory!"
 read -p "Enter dataset id: " id
 read -p "Enter resolution (low | std | high): " res
-read -p "Enter resample (default | NoResample): " resample
+read -p "Enter resample (default | NoRsmp): " resample
 read -p "Enter configuration (press Enter to set automatically): " config
 read -p "Enter planner (press Enter to set automatically): " planner
 read -p "Enter GPU memory (press Enter to set automatically): " gpu_mem
