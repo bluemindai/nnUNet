@@ -117,7 +117,7 @@ class nnUNetTrainer_MOSAIC_500_QuarterLR(nnUNetTrainer):
 class nnUNetTrainer_MOSAIC_500_QuarterLR_NoMirroring(nnUNetTrainerNoMirroring):
     def __init__(self, plans: dict, configuration: str, fold: int, dataset_json: dict, 
                  device: torch.device = torch.device('cuda')):
-        super().__init__plans, configuration, fold, dataset_json, device)
+        super().__init__(plans, configuration, fold, dataset_json, device)
         self.initial_lr = 2.5e-3
         self.num_epochs = 500
 
