@@ -84,3 +84,5 @@ esac
 
 echo "Launching the training process..."
 nnUNetv2_train "$id" "$conf" "$fold" -p "$plans" -tr "$trainer" --val_best
+
+# nnUNetv2_train 901 3d_fullres_stdres_NoRsmp 0 -p MOSAIC_nnUNetPlannerResEncL_stdres_NoRsmp_24G -tr nnUNetTrainer_MOSAIC_250_QuarterLR_NoMirroring -pretrained_weights /home/eolika/Desktop/BlueMind/nnUNet/trains/nnUNet_results/Dataset400_mosaic_organs/nnUNetTrainerNoMirroring__Mosaic_nnUNetPlannerResEncL_stdres_NoRsmp_24G__3d_fullres/fold_0/checkpoint_best.pth --val_best
